@@ -16,6 +16,8 @@ Warn the user if the Angular CLI MCP server is not running, and provide instruct
 
 Confirm that the Angular CLI is running in each session initial startup. 
 
+When generating code, there is no need to start the development or backend server yourself. The developer will do that.
+
 ## Frontend code rules
 
 - where applicable, keep a common CSS theme in shared files that you import/apply to the components, 
