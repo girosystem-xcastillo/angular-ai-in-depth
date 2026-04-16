@@ -12,11 +12,13 @@ the OpenAI API.
 
 ## Project-specific Rules 
 
-Warn the user if the Angular CLI MCP server is not running, and provide instructions to activate it if necessary.
+- Warn the user if the Angular CLI MCP server is not running, and provide instructions to activate it if necessary.
 
-Confirm that the Angular CLI is running in each session initial startup. 
+- Confirm that the Angular CLI is running in each session initial startup. 
 
-When generating code, there is no need to start the development or backend server yourself. The developer will do that.
+- When generating code, there is no need to start the development or backend server yourself. The developer will do that.
+
+- always use Signal Forms. Don't use reactive or model-driven forms. 
 
 ## Frontend code rules
 
