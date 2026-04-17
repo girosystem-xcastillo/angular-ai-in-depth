@@ -51,13 +51,23 @@ Don't modify any frontend code, this is purely a backend task.
 
 Add an authentication backend user creation endpoint mapped to url /api/sign-up that takes in an email and password, creates a new user and adds to the in-memory data store.
 
-# Prompt 7 - implement frontend authentication calls to the backend
+# Prompt 7 - router loading indicator
 
-Create an angular AuthService that gets used by the sign-in screen to login a user. Also use it to have the sign-up screen to call the sign-up endpoint.  
+create a router loading indicator Angular component that gets displayed whenever a router transition is ongoing.  
 
-Add a reusable loading indicator component. Handle error scenarios properly by displaying an error message to the user. 
+# Prompt 8 - reusable user messages component
 
-For that, create a reusable user messages component that allows to display errors to the user in a top message horizontal bar on top of the screen.
+create a reusable user messages component that allows to display errors to the user in a top message horizontal bar on top of the screen.
 
-The messages bar should be closeable.
+The messages bar should be closeable. It should also to display informational messages and warnings.
+
+# Prompt 9 - implement frontend authentication call to the backend
+
+Create an angular AuthService that gets used by the sign-in screen to login a user.   
+
+Handle authentication error scenarios properly by displaying an error message to the user. If authentication is successful, send the user to the home screen.
+
+# Prompt 10 - implement front user creation logic 
+
+add a createUser method to AuthService, and call it in the sign-up screen. If the user is created successfully send it to home screen, otherwise display an error. 
 
