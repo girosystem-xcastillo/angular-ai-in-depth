@@ -3,7 +3,11 @@
 
 These are the prompts that you will be needing throughout the course.
 
-Claude doesn't know about them due to .claudeignore. So you have to paste them in the Claude prompt. 
+Claude doesn't know about them due to .claudeignore. So you have to paste them in one by one the Claude prompt.
+
+These prompts follow the exact sequence used in the course, where we split things up in separate steps for educational purposes.
+
+In a production application, feel free to group them together.  
 
 ## Prompt 1 - Create application layout and auth screens  
 
@@ -16,8 +20,11 @@ The two screens have very similar styles, refactor common parts into a common sc
 You can find the images you need in the public/images folder. The left image above "Angular AI In Depth" is 
 angular-ai-course-logo.png, while the Angular University logo used inside the right-side box is angular-university-logo.svg 
 
-Use the Inter font everywhere.
+## Prompt 2 - set application fonts
 
-make all screens  responsive in the sense that they centered in  
-the middle in a desktop view. make the responsive styles         
-reusable where applicable. 
+Use the Inter font everywhere. 
+
+## Prompt 3 - correct layout, make it responsive 
+
+Make all screens responsive in the sense that they centered in  
+the middle in a desktop view. make the responsive styles reusable where applicable. 
