@@ -73,5 +73,5 @@ Handle authentication error scenarios properly by displaying an error message to
 
 # Prompt 10 - implement front user creation logic 
 
-add a createUser method to AuthService, and call it in the sign-up screen. If the user is created successfully send it to home screen, otherwise display an error. 
+Add a createUser method to AuthService, and call it in the sign-up screen. If the user is created successfully send it to home screen, otherwise display an error. 
 
