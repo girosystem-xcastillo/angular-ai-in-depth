@@ -51,7 +51,13 @@ Don't modify any frontend code, this is purely a backend task.
 
 Add an authentication backend user creation endpoint mapped to url /api/sign-up that takes in an email and password, creates a new user and adds to the in-memory data store.
 
+# Prompt 7 - implement frontend authentication calls to the backend
 
+Create an angular AuthService that gets used by the sign-in screen to login a user. Also use it to have the sign-up screen to call the sign-up endpoint.  
 
+Add a reusable loading indicator component. Handle error scenarios properly by displaying an error message to the user. 
 
+For that, create a reusable user messages component that allows to display errors to the user in a top message horizontal bar on top of the screen.
+
+The messages bar should be closeable.
 
