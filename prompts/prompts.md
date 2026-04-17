@@ -39,7 +39,7 @@ Add a command npm run server to start the server.
 
 # Prompt 5 - add authentication route to the backend server
 
-Add an authentication /api/sign-in backend endpoint that takes in an email and password, and authenticates the user.
+Add an authentication backend endpoint mapped to url /api/sign-in that takes in an email and password, and authenticates the user.
 
 Add some mock data for the user, with email test@angular-university.io and password angular. 
 

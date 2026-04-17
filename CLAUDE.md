@@ -35,7 +35,7 @@ the OpenAI API.
 
 - there is no persistent database, just in-memory modifiable mock data based on a db-data.ts file
 
-- each Express route should be in a separate file under the /server/routes folder
+- each Express route should be in a separate file under the /server/routes folder. Make the routes plain express functions, and link them to the url and the HTTP method on server.ts
 
 - make the backend secure according to the latest OWASP recommendations. 
 

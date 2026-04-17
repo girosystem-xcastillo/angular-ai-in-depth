@@ -1,7 +1,7 @@
 import express from 'express';
 import argon2 from 'argon2';
 import { users } from './db-data';
-import { signInRouter } from './routes/sign-in';
+import { signIn } from './routes/sign-in';
 
 const PORT = process.env['PORT'] ?? 9000;
 
@@ -28,7 +28,7 @@ app.get('/', (_req, res) => {
   `);
 });
 
-app.use('/api', signInRouter);
+app.post('/api/sign-in', signIn);
 
 async function startServer() {
   // Seed in-memory users with argon2id-hashed passwords.
