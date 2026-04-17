@@ -1,15 +1,35 @@
+@use '../shared/breakpoints' as *;
+
 // ─── Shared auth page styles (sign-in & sign-up) ────────────────────────────
 
 :host {
   display: block;
 }
 
-// ─── Page layout ─────────────────────────────────────────────────────────────
+// ─── Page — full-viewport background, centers the layout ─────────────────────
 
 .auth-page {
-  display: flex;
-  height: 100vh;          // exact viewport height so flex children can stretch & center
+  min-height: 100vh;
   background-color: #2d1b69;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+// ─── Layout — max-width wrapper, two columns on desktop ──────────────────────
+
+.auth-layout {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  gap: 4rem;
+
+  @include tablet-and-below {
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
 
 // ─── Left hero ───────────────────────────────────────────────────────────────
@@ -21,16 +41,24 @@
   align-items: center;
   justify-content: center;
   gap: 1.25rem;
-  padding: 2rem;
+
+  @include tablet-and-below {
+    padding-top: 0.5rem;
+  }
 }
 
 .hero-logo-container {
   position: relative;
   width: 380px;
-  height: 253px;          // maintains the logo's natural aspect ratio
+  height: 253px;
 
   img {
-    object-fit: contain;  // prevents stretching inside the fill container
+    object-fit: contain;
+  }
+
+  @include tablet-and-below {
+    width: 220px;
+    height: 147px;
   }
 }
 
@@ -46,12 +74,13 @@
 // ─── Right panel ─────────────────────────────────────────────────────────────
 
 .auth-panel {
-  width: 460px;
-  min-width: 460px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  width: 420px;
+  min-width: 420px;
+
+  @include tablet-and-below {
+    width: 100%;
+    min-width: unset;
+  }
 }
 
 // ─── Auth card ───────────────────────────────────────────────────────────────
@@ -60,7 +89,7 @@
   width: 100%;
   background: #160930;
   border-radius: 16px;
-  overflow: hidden;       // clips the footer divider cleanly
+  overflow: hidden;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
 }
 
@@ -131,7 +160,7 @@
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
   }
 
-  // suppress browser native :invalid red styling (Signal Forms handles validation state)
+  // suppress browser native :invalid red styling
   &:invalid {
     box-shadow: none;
     border-color: rgba(255, 255, 255, 0.08);
@@ -206,30 +235,5 @@
       border-radius: 2px;
       outline-offset: 1px;
     }
-  }
-}
-
-// ─── Responsive ──────────────────────────────────────────────────────────────
-
-@media (max-width: 800px) {
-  .auth-page {
-    flex-direction: column;
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .auth-hero {
-    padding: 3rem 2rem 1.5rem;
-  }
-
-  .hero-logo-container {
-    width: 240px;
-    height: 160px;
-  }
-
-  .auth-panel {
-    width: 100%;
-    min-width: unset;
-    padding: 1rem 1.5rem 2rem;
   }
 }

@@ -5,7 +5,7 @@ These are the prompts that you will be needing throughout the course.
 
 Claude doesn't know about them due to .claudeignore. So you have to paste them in the Claude prompt. 
 
-## Prompt 1 - Create login screens and empty home page 
+## Prompt 1 - Create application layout and auth screens  
 
 Based on the UI Figma screenshots available in the /ui-screenshots folder, generate the frontend Angular part of just the sign in and sign up screens.
 
