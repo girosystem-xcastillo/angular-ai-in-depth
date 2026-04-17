@@ -20,6 +20,12 @@ the OpenAI API.
 
 - always use Signal Forms. Don't use reactive or model-driven forms. 
 
+- don't use Rxjs and Observables unless explicitly told to. Define the API of your service layers with Promises. 
+
+- For handling async code, prefer Promises and the async /await syntax 
+
+- If you run into Angular APIs that are still Observable-based, convert them to Promises using firstValueFrom 
+
 ## Frontend code rules
 
 - where applicable, keep a common CSS theme in shared files that you import/apply to the components, 
