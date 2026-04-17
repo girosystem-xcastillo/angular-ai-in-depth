@@ -51,9 +51,13 @@ Don't modify any frontend code, this is purely a backend task.
 
 Add an authentication backend user creation endpoint mapped to url /api/sign-up that takes in an email and password, creates a new user and adds to the in-memory data store.
 
-# Prompt 7 - router loading indicator
+# Prompt 7 - loading indicator
 
-create a router loading indicator Angular component that gets displayed whenever a router transition is ongoing.  
+create a reusable loading indicator Angular component that can be used anywhere on the application.  
+
+# Prompt 8 - router loading indicator
+
+use the reusable loading indicator to create a router loading indicator that get's shown whenever a router transition is ongoing.
 
 # Prompt 8 - reusable user messages component
 
