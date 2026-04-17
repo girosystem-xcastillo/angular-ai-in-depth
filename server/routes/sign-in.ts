@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import argon2 from 'argon2';
 import { users } from '../db-data';
+import { logger } from '../logger';
 
 export async function signIn(req: Request, res: Response) {
   const { email, password } = req.body ?? {};
@@ -18,9 +19,11 @@ export async function signIn(req: Request, res: Response) {
     : false;
 
   if (!valid) {
+    logger.warn({ email }, 'Failed sign-in attempt');
     res.status(401).json({ message: 'Invalid credentials.' });
     return;
   }
 
+  logger.info({ email, userId: user!.id }, 'User signed in');
   res.json({ user: { id: user!.id, email: user!.email } });
 }
