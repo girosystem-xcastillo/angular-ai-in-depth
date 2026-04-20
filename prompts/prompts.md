@@ -65,6 +65,11 @@ create a reusable user messages component that allows to display errors to the u
 
 The messages bar should be closeable. It should also allow to display informational messages and warnings.
 
+
+
+
+TODO
+
 # Prompt 10 - implement frontend authentication call to the backend
 
 Create an angular AuthService that gets used by the sign-in screen to login a user.   
