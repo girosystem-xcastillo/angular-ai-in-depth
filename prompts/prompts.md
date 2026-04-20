@@ -59,20 +59,19 @@ create a reusable loading indicator Angular component that can be used anywhere 
 
 use the reusable loading indicator just created to create a router loading indicator that gets shown whenever a router transition is ongoing.
 
-
-# Prompt 8 - reusable user messages component
+# Prompt 9 - reusable user messages component
 
 create a reusable user messages component that allows to display errors to the user in a top message horizontal bar on top of the screen.
 
-The messages bar should be closeable. It should also to display informational messages and warnings.
+The messages bar should be closeable. It should also allow to display informational messages and warnings.
 
-# Prompt 9 - implement frontend authentication call to the backend
+# Prompt 10 - implement frontend authentication call to the backend
 
 Create an angular AuthService that gets used by the sign-in screen to login a user.   
 
 Handle authentication error scenarios properly by displaying an error message to the user. If authentication is successful, send the user to the home screen.
 
-# Prompt 10 - implement front user creation logic 
+# Prompt 11 - implement front user creation logic 
 
 Add a createUser method to AuthService, and call it in the sign-up screen. If the user is created sucessfully send it to home screen, otherwise display an error. 
 
