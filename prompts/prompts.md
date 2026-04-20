@@ -53,9 +53,6 @@ Add an authentication backend user creation endpoint mapped to url /api/sign-up 
 
 
 
-------------------------
-TODO continue from here 
-------------------------
 
 # Prompt 7 - loading indicator
 
