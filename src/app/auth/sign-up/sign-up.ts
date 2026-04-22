@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { UserProfileService } from '../user-profile.service';
 import { LoadingIndicator } from '../../shared/components/loading-indicator/loading-indicator';
 import { UserMessageService } from '../../shared/components/user-message/user-message.service';
 
@@ -21,6 +22,7 @@ interface SignUpData {
 })
 export class SignUp {
   private readonly authService = inject(AuthService);
+  private readonly userProfile = inject(UserProfileService);
   private readonly router = inject(Router);
   private readonly userMessage = inject(UserMessageService);
 
@@ -40,7 +42,8 @@ export class SignUp {
     this.userMessage.clear();
 
     try {
-      await this.authService.signUp(this.model().email, this.model().password);
+      const response = await this.authService.signUp(this.model().email, this.model().password);
+      this.userProfile.saveSession(response.token, response.user);
       this.router.navigate(['/home']);
     } catch (err: unknown) {
       const httpErr = err as HttpErrorResponse;

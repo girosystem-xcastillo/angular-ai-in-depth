@@ -103,6 +103,11 @@ Make the /api/sign-in route also JWT-based.
 
 # Prompt 16 - Adapt frontend to store JWTs
 
+on the sign-in screen, retrieve the JWT from the response and store it in local storage, to allow future requests to be validated by the server.
+
+to make the user profile available everywhere in the application, create a shared singleton UserProfile service, and set it with the user information.
+
+do the same for the sign-up screen.
 
 # Prompt 14 - add authentication guard
 
