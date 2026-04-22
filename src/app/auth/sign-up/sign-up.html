@@ -76,9 +76,14 @@
                   }
                 </ul>
               }
+              @if (passwordMismatch()) {
+                <ul class="field-errors" role="alert" aria-live="polite">
+                  <li>Passwords do not match</li>
+                </ul>
+              }
             </div>
 
-            <button type="submit" class="auth-submit-btn" [disabled]="loading()">
+            <button type="submit" class="auth-submit-btn" [disabled]="loading() || passwordMismatch()">
               @if (loading()) {
                 <loading-indicator />
               } @else {

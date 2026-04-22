@@ -123,7 +123,9 @@ use the UserProfile service to know if the user is logged in or not. apply the g
 
 create an HTTP interceptor that takes the JWT from local storage and append it in a header to every request sent to the server. 
 
+# Prompt 16 - add confirm password form error
 
+on the sign up screen, show and error message and disable the form if the password cannot be confirmed. 
 
 
 

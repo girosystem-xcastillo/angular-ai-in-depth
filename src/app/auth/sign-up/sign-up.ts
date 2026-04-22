@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { email, form, FormField, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
@@ -34,6 +34,11 @@ export class SignUp {
     email(p.email, { message: 'Enter a valid email address' });
     required(p.password, { message: 'Password is required' });
     required(p.confirmPassword, { message: 'Please confirm your password' });
+  });
+
+  protected readonly passwordMismatch = computed(() => {
+    const { password, confirmPassword } = this.model();
+    return this.form.confirmPassword().touched() && password !== confirmPassword;
   });
 
   protected async onSubmit(event: Event) {
