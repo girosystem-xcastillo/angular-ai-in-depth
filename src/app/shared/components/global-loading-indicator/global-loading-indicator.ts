@@ -1,19 +1,19 @@
-import { Component, inject, signal } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { LoadingIndicator } from '../loading-indicator/loading-indicator';
+import { GlobalLoadingService } from './global-loading.service';
 
 @Component({
   selector: 'global-loading-indicator',
   imports: [LoadingIndicator],
   template: `
-    @if (loading()) {
-      <div class="router-loading-overlay" aria-live="polite" aria-label="Page loading">
+    @if (globalLoading.loading()) {
+      <div class="global-loading-overlay" aria-live="polite" aria-label="Page loading">
         <loading-indicator />
       </div>
     }
   `,
   styles: [`
-    .router-loading-overlay {
+    .global-loading-overlay {
       position: fixed;
       inset: 0;
       z-index: 9000;
@@ -25,17 +25,5 @@ import { LoadingIndicator } from '../loading-indicator/loading-indicator';
   `]
 })
 export class GlobalLoadingIndicator {
-  private readonly router = inject(Router);
-
-  protected readonly loading = signal(false);
-
-  constructor() {
-    this.router.events.subscribe(e => {
-      if (e instanceof NavigationStart) {
-        this.loading.set(true);
-      } else if (e instanceof NavigationEnd || e instanceof NavigationCancel || e instanceof NavigationError) {
-        this.loading.set(false);
-      }
-    });
-  }
+  protected readonly globalLoading = inject(GlobalLoadingService);
 }
