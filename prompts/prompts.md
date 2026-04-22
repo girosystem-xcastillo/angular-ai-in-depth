@@ -7,7 +7,7 @@ Claude doesn't know about them due to .claudeignore. So you have to paste them i
 
 These prompts follow the exact sequence used in the course, where we split things up in separate steps for educational purposes.
 
-In a production application, feel free to group them together.  
+Each prompt is large enough that the AI does several things in one go, while remaining small enough for a human to easily verify its output.
 
 ## Prompt 1 - Create application layout and auth screens  
 
@@ -65,16 +65,21 @@ create a reusable user messages component that allows to display errors to the u
 
 The messages bar should be closeable. It should also allow to display informational messages and warnings.
 
+apply the messages component in one single place, the application root component.
 
+# Prompt 10 - reusable user messages service
 
+create a shared signals based user messages service that can be used by any screen to interact with the user messages component.
 
-TODO
+# Prompt 11 - implement frontend authentication 
 
-# Prompt 10 - implement frontend authentication call to the backend
-
-Create an angular AuthService that gets used by the sign-in screen to login a user.   
+Create an angular AuthService that has a sign method, that calls the sign in backend endpoint.
 
 Handle authentication error scenarios properly by displaying an error message to the user. If authentication is successful, send the user to the home screen.
+
+Use the service to implement the sign in screen.
+
+
 
 # Prompt 11 - implement front user creation logic 
 

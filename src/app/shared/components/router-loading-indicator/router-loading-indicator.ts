@@ -1,7 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map, filter, startWith } from 'rxjs';
 import { LoadingIndicator } from '../loading-indicator/loading-indicator';
 
 @Component({
@@ -29,17 +27,15 @@ import { LoadingIndicator } from '../loading-indicator/loading-indicator';
 export class RouterLoadingIndicator {
   private readonly router = inject(Router);
 
-  protected readonly loading = toSignal(
-    this.router.events.pipe(
-      filter(e =>
-        e instanceof NavigationStart ||
-        e instanceof NavigationEnd ||
-        e instanceof NavigationCancel ||
-        e instanceof NavigationError
-      ),
-      map(e => e instanceof NavigationStart),
-      startWith(false)
-    ),
-    { initialValue: false }
-  );
+  protected readonly loading = signal(false);
+
+  constructor() {
+    this.router.events.subscribe(e => {
+      if (e instanceof NavigationStart) {
+        this.loading.set(true);
+      } else if (e instanceof NavigationEnd || e instanceof NavigationCancel || e instanceof NavigationError) {
+        this.loading.set(false);
+      }
+    });
+  }
 }
