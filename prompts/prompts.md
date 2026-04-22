@@ -55,9 +55,11 @@ Add an authentication backend user creation endpoint mapped to url /api/sign-up 
 
 create a reusable loading indicator Angular component that can be used anywhere on the application.  use the gif available in public/images/loading-indicator.gif
 
-# Prompt 8 - router loading indicator
+# Prompt 8 - global loading indicator
 
-use the reusable loading indicator just created to create a router loading indicator that gets shown whenever a router transition is ongoing.
+use the reusable loading indicator just created to create a global loading indicator that gets shown whenever a router transition is ongoing.
+
+created a shared stateful signal-based GlobalLoadingService that can be used to turn on and off the global loading indicator from anywhere in the application.
 
 # Prompt 9 - reusable user messages component
 
@@ -71,7 +73,13 @@ apply the messages component in one single place, the application root component
 
 create a shared signals based user messages service that can be used by any screen to interact with the user messages component.
 
-# Prompt 11 - implement frontend authentication 
+# Prompt 11 - Http loading interceptor
+
+create and plug in a global http interceptor that turns on the global loading indicator when the request starts and turns it off when the request completes successfully or fails.
+
+use the GlobalLoadingService to communicate with the global loading indicator.
+
+# Prompt 12 - implement frontend authentication 
 
 Create an angular AuthService that has a sign method, that calls the sign in backend endpoint.
 
@@ -79,9 +87,7 @@ Handle authentication error scenarios properly by displaying an error message to
 
 Use the service to implement the sign in screen.
 
-
-
-# Prompt 11 - implement front user creation logic 
+# Prompt 12 - implement front user creation logic 
 
 Add a createUser method to AuthService, and call it in the sign-up screen. If the user is created sucessfully send it to home screen, otherwise display an error. 
 
