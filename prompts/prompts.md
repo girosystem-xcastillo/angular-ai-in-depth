@@ -87,7 +87,22 @@ Handle authentication error scenarios properly by displaying an error message to
 
 Use the service to implement the sign in screen.
 
-# Prompt 12 - implement front user creation logic 
+# Prompt 13 - implement front user creation logic 
 
 Add a createUser method to AuthService, and call it in the sign-up screen. If the user is created sucessfully send it to home screen, otherwise display an error. 
+
+# Prompt 14 - Add JWT-based authentication 
+
+The backend service /api/sign-in should return a signed JWT in its response containing the JSON payload, instead of just returning the plain payload itself.  
+
+use HS256 JWTs, assume the  key is on the .env file. Add a sample  key to .env and .env.example.
+
+# Prompt 14 - add authentication guard
+
+create an AuthGuard thar
+
+
+
+
+
 

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import argon2 from 'argon2';
 import { users } from '../db-data';
 import { logger } from '../logger';
+import { signJwt } from '../utils/jwt';
 
 export async function signIn(req: Request, res: Response) {
   const { email, password } = req.body ?? {};
@@ -24,6 +25,8 @@ export async function signIn(req: Request, res: Response) {
     return;
   }
 
+  const token = signJwt({ sub: user!.id, email: user!.email });
+
   logger.info({ email, userId: user!.id }, 'User signed in');
-  res.json({ user: { id: user!.id, email: user!.email } });
+  res.json({ token });
 }
