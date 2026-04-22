@@ -105,13 +105,21 @@ Make the /api/sign-in route also JWT-based.
 
 on the sign-in screen, retrieve the JWT from the response and store it in local storage, to allow future requests to be validated by the server.
 
+store the user profile and the token separately in local storage. 
+
 to make the user profile available everywhere in the application, create a shared singleton UserProfile service, and set it with the user information.
 
 do the same for the sign-up screen.
 
+the user profile service should reload the profile from local storage between refreshes.
+
 # Prompt 14 - add authentication guard
 
-create an AuthGuard thar
+Create an authentication guard that redirects the user to the sign in screen if not properly authenticated. 
+
+use the UserProfile service to know if the user is logged in or not. apply the guard to the home screen only. 
+
+
 
 
 
