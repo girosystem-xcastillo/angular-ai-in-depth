@@ -178,3 +178,7 @@ Create a /api/continue-conversation backend endpoint. apply auth middleware. tak
 Retrieves the conversation from the in-memory DB, appends the new user message and gets a new AI reply. 
 
 Saves the conversation in in-memory db, and returns the last ai response. 
+
+# create retrieve history endpoint
+
+create a GET /api/get-conversations endpoint that retrieves all chat history from the in-memory DB. apply auth middleware. 
