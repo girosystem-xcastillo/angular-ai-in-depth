@@ -1,9 +1,10 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ChatSidebar } from './sidebar/sidebar';
 import { WelcomeScreen } from './welcome-screen/welcome-screen';
 import { ChatConversation } from './conversation/conversation';
 import { ChatMessage, Conversation } from './chat.model';
 import { MOCK_CONVERSATIONS } from './mock-conversations';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'home',
@@ -12,6 +13,8 @@ import { MOCK_CONVERSATIONS } from './mock-conversations';
   imports: [ChatSidebar, WelcomeScreen, ChatConversation],
 })
 export class Home {
+  private readonly authService = inject(AuthService);
+
   sidebarCollapsed = signal(true);
   activeConversationId = signal<string | null>(null);
   conversations = signal<Conversation[]>([...MOCK_CONVERSATIONS]);
@@ -34,7 +37,9 @@ export class Home {
     this.activeConversationId.set(convId);
   }
 
-  onLogout() {}
+  async onLogout() {
+    await this.authService.logout();
+  }
 
   onMessageSent(content: string) {
     const newMessage: ChatMessage = {

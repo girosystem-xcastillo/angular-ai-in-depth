@@ -142,3 +142,7 @@ Don't do backend calls and focus purely on the visual part. add some mock data i
 Make the home screen responsive, center the content in the middle of the screen.
 
 the collapsible side menu should be a separate component. the chat history, the initial state and the conversation thread should also be separate components.   
+
+# implement logout
+
+add a logout method to the authentication service. implement the logout button, redirect to login page and clear profile and token from local storage.
