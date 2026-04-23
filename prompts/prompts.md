@@ -163,6 +163,8 @@ Don't worry about authentication for now.
 
 Don't mention OpenAI in the response names, etc. we might change it to another AI provider in the future.
 
+Add appropriate logging.
+
 # refactor 
 
 refactor the logic to get a completion based on a conversation into a separate reusable async function  
@@ -170,6 +172,7 @@ refactor the logic to get a completion based on a conversation into a separate r
 # create an authentication middleware 
 
 create a middleware that ensure the request contains a valid JWT. Apply the middleware to the start-conversation route only.
+Add appropriate logging.
 
 # create continue conversation endpoint
 
@@ -177,8 +180,16 @@ Create a /api/continue-conversation backend endpoint. apply auth middleware. tak
 
 Retrieves the conversation from the in-memory DB, appends the new user message and gets a new AI reply. 
 
-Saves the conversation in in-memory db, and returns the last ai response. 
+Saves the conversation in in-memory db, and returns the last ai response. Add appropriate logging.
 
 # create retrieve history endpoint
 
-create a GET /api/get-conversations endpoint that retrieves all chat history from the in-memory DB. apply auth middleware. 
+create a GET /api/get-conversations-history endpoint that retrieves all chat history from the in-memory DB. apply auth middleware.
+
+This only retrieves the conversation summary or description, but not the messages themselves.
+
+# create retrieve conversation endpoint
+
+create a /api/get-conversation endpoint to retrieve a single conversation based on id.
+
+it should return a single conversation, with all it's messages 

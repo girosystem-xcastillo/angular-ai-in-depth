@@ -24,7 +24,7 @@ app.post('/api/sign-in', signIn);
 app.post('/api/sign-up', signUp);
 app.post('/api/start-conversation', requireAuth, startConversation);
 app.post('/api/continue-conversation', requireAuth, continueConversation);
-app.get('/api/get-conversations', requireAuth, getConversations);
+app.get('/api/get-conversations-history', requireAuth, getConversations);
 
 async function startServer() {
   await seedUsers();
