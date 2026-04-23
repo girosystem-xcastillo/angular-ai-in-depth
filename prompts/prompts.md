@@ -139,6 +139,6 @@ Then once the conversation starts, the screen looks like /ui-screenshots/chat-co
 
 Don't do backend calls and focus purely on the visual part. add some mock data in a separate file simulating several conversations, each with several chat messages and their reply. 
 
-Make the hom screen responsive, center the content in the middle of the screen.
+Make the home screen responsive, center the content in the middle of the screen.
 
 the collapsible side menu should be a separate component. the chat history, the initial state and the conversation thread should also be separate components.   
