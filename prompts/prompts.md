@@ -172,7 +172,7 @@ refactor the logic to get a completion based on a conversation into a separate r
 # create an authentication middleware 
 
 create a middleware that ensure the request contains a valid JWT. Apply the middleware to the start-conversation route only.
-Add appropriate logging.
+
 
 # create continue conversation endpoint
 
@@ -180,7 +180,7 @@ Create a /api/continue-conversation backend endpoint. apply auth middleware. tak
 
 Retrieves the conversation from the in-memory DB, appends the new user message and gets a new AI reply. 
 
-Saves the conversation in in-memory db, and returns the last ai response. Add appropriate logging.
+Saves the conversation in in-memory db, and returns the last ai response. 
 
 # create retrieve history endpoint
 
@@ -192,4 +192,8 @@ This only retrieves the conversation summary or description, but not the message
 
 create a /api/get-conversation endpoint to retrieve a single conversation based on id.
 
-it should return a single conversation, with all it's messages 
+it should return a single conversation, with all it's messages. 
+
+# add loging
+
+Add appropriate logging to all endpoints and middleware.

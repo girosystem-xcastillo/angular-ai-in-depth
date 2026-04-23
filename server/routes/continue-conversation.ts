@@ -7,11 +7,13 @@ export async function continueConversation(req: Request, res: Response) {
   const { conversationId, message } = req.body ?? {};
 
   if (!conversationId || typeof conversationId !== 'string') {
+    logger.warn({ body: req.body }, 'continue-conversation: missing conversationId');
     res.status(400).json({ message: 'conversationId is required.' });
     return;
   }
 
   if (!message || typeof message !== 'string' || message.trim().length === 0) {
+    logger.warn({ conversationId }, 'continue-conversation: missing or empty message');
     res.status(400).json({ message: 'message is required.' });
     return;
   }
@@ -19,6 +21,7 @@ export async function continueConversation(req: Request, res: Response) {
   const conversation = conversationsDb.get(conversationId);
 
   if (!conversation) {
+    logger.warn({ conversationId }, 'continue-conversation: conversation not found');
     res.status(404).json({ message: 'Conversation not found.' });
     return;
   }
@@ -27,6 +30,8 @@ export async function continueConversation(req: Request, res: Response) {
     ...conversation.messages,
     { role: 'user' as const, content: message.trim() },
   ];
+
+  logger.info({ conversationId, messageCount: updatedMessages.length }, 'Requesting AI completion to continue conversation');
 
   let assistantContent: string;
 
@@ -46,7 +51,7 @@ export async function continueConversation(req: Request, res: Response) {
     ],
   });
 
-  logger.info({ conversationId }, 'Conversation continued');
+  logger.info({ conversationId }, 'Conversation continued and saved');
 
   res.json({ message: assistantContent });
 }

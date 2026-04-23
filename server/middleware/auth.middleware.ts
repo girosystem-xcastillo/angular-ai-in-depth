@@ -7,15 +7,17 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
 
   if (!token) {
+    logger.warn({ path: req.path, method: req.method }, 'Request missing auth token');
     res.status(401).json({ message: 'Missing authentication token.' });
     return;
   }
 
   try {
     verifyJwt(token);
+    logger.debug({ path: req.path, method: req.method }, 'Auth token verified');
     next();
   } catch {
-    logger.warn({ path: req.path }, 'Invalid or expired token');
+    logger.warn({ path: req.path, method: req.method }, 'Invalid or expired token');
     res.status(401).json({ message: 'Invalid or expired token.' });
   }
 }

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { logger } from '../logger';
 import { conversationsDb } from '../conversations-db';
 import { ConversationSummary } from './get-conversations.model';
 
@@ -11,6 +12,8 @@ export function getConversations(req: Request, res: Response) {
 
     return { id: conv.id, title, createdAt: conv.createdAt };
   });
+
+  logger.info({ count: conversations.length }, 'Returning conversation history');
 
   res.json({ conversations });
 }
