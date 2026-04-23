@@ -127,6 +127,18 @@ create an HTTP interceptor that takes the JWT from local storage and append it i
 
 on the sign up screen, show and error message and disable the form if the passwords don't match. use a form validator. put it in an external file. 
 
+# create the UI part of the chat home screen
 
+based on screenshots /ui-screenshots/chat-initial-state-no-history.png and /ui-screenshots/chat-conversation-ongoing-history-filled.png create the home screen. 
 
+The home screen has a left navigation panel with the chat history that is collapsible, and a logout button in the bottom. 
 
+There is an initial history where the logo /public/images/angular-ai-course-logo.png gets displayed in the center of the screen, that initial state corresponds to file /ui-screenshots/chat-initial-state-no-history.png
+
+Then once the conversation starts, the screen looks like /ui-screenshots/chat-conversation-ongoing-history-filled.png. 
+
+Don't do backend calls and focus purely on the visual part. add some mock data in a separate file simulating several conversations, each with several chat messages and their reply. 
+
+Make the hom screen responsive, center the content in the middle of the screen.
+
+the collapsible side menu should be a separate component. the chat history, the initial state and the conversation thread should also be separate components.   
