@@ -35,7 +35,8 @@ Inside a /server folder, create an express server with a single root route / tha
 
 Make the server port taken from an environment variable PORT otherwise use a default port 9000 for development. 
 
-Add a command npm run server to start the server. 
+Add a command npm run server to start the server.  make the command  start the server in development mode, where the server reloads when
+a server file changes.
 
 # Prompt 5 - add authentication route to the backend server
 
