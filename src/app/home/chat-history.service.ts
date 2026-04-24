@@ -23,14 +23,12 @@ export class ChatHistoryService {
   }
 
   private mapToConversation(apiConversation: ApiConversation): Conversation {
-    const messages = apiConversation.messages
-      .filter(msg => msg.role !== 'system')
-      .map((msg, index) => ({
-        id: `${apiConversation.id}-${index}`,
-        role: msg.role as 'user' | 'assistant',
-        content: msg.content,
-        timestamp: new Date(apiConversation.createdAt),
-      }));
+    const messages = apiConversation.messages.map((msg, index) => ({
+      id: `${apiConversation.id}-${index}`,
+      role: msg.role,
+      content: msg.content,
+      timestamp: new Date(apiConversation.createdAt),
+    }));
 
     const firstUserMessage = messages.find(msg => msg.role === 'user');
     const title = firstUserMessage

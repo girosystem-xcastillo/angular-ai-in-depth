@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { logger } from '../logger';
-import { conversationsDb } from '../conversations-db';
+import { conversationsDb, AiMessage } from '../conversations-db';
+import { getSystemPrompt } from '../prompts';
 import { getAiCompletion } from '../utils/ai';
 
 export async function continueConversation(req: Request, res: Response) {
@@ -26,17 +27,28 @@ export async function continueConversation(req: Request, res: Response) {
     return;
   }
 
-  const updatedMessages = [
+  const systemPrompt = getSystemPrompt(conversation.promptId);
+
+  if (!systemPrompt) {
+    logger.error({ conversationId, promptId: conversation.promptId }, 'continue-conversation: prompt no longer available');
+    res.status(500).json({ message: 'Conversation prompt is no longer available.' });
+    return;
+  }
+
+  const userMessage = message.trim();
+
+  const messagesForAi: AiMessage[] = [
+    { role: 'system', content: systemPrompt },
     ...conversation.messages,
-    { role: 'user' as const, content: message.trim() },
+    { role: 'user', content: userMessage },
   ];
 
-  logger.info({ conversationId, messageCount: updatedMessages.length }, 'Requesting AI completion to continue conversation');
+  logger.info({ conversationId, messageCount: messagesForAi.length }, 'Requesting AI completion to continue conversation');
 
   let assistantContent: string;
 
   try {
-    assistantContent = await getAiCompletion(updatedMessages);
+    assistantContent = await getAiCompletion(messagesForAi);
   } catch (err) {
     logger.error({ err, conversationId }, 'Failed to get AI completion');
     res.status(502).json({ message: 'Could not reach AI service. Please try again.' });
@@ -46,7 +58,8 @@ export async function continueConversation(req: Request, res: Response) {
   conversationsDb.set(conversationId, {
     ...conversation,
     messages: [
-      ...updatedMessages,
+      ...conversation.messages,
+      { role: 'user', content: userMessage },
       { role: 'assistant', content: assistantContent },
     ],
   });

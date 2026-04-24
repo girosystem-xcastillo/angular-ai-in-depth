@@ -5,7 +5,7 @@ export type ConversationSummary = {
 };
 
 export type ApiConversationMessage = {
-  role: 'system' | 'user' | 'assistant';
+  role: 'user' | 'assistant';
   content: string;
 };
 

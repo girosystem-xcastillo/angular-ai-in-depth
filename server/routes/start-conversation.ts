@@ -28,9 +28,11 @@ export async function startConversation(req: Request, res: Response) {
     return;
   }
 
-  const messages: AiMessage[] = [
+  const userMessage = message.trim();
+
+  const messagesForAi: AiMessage[] = [
     { role: 'system', content: systemPrompt },
-    { role: 'user', content: message.trim() },
+    { role: 'user', content: userMessage },
   ];
 
   logger.info({ promptId }, 'Requesting AI completion for new conversation');
@@ -38,7 +40,7 @@ export async function startConversation(req: Request, res: Response) {
   let assistantContent: string;
 
   try {
-    assistantContent = await getAiCompletion(messages);
+    assistantContent = await getAiCompletion(messagesForAi);
   } catch (err) {
     logger.error({ err, promptId }, 'Failed to get AI completion');
     res.status(502).json({ message: 'Could not reach AI service. Please try again.' });
@@ -49,8 +51,9 @@ export async function startConversation(req: Request, res: Response) {
 
   conversationsDb.set(conversationId, {
     id: conversationId,
+    promptId,
     messages: [
-      ...messages,
+      { role: 'user', content: userMessage },
       { role: 'assistant', content: assistantContent },
     ],
     createdAt: new Date(),

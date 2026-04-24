@@ -5,6 +5,7 @@ export type AiMessage = {
 
 export type StoredConversation = {
   id: string;
+  promptId: string;
   messages: AiMessage[];
   createdAt: Date;
 };
