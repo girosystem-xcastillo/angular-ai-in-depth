@@ -2,8 +2,8 @@
 
   <chat-sidebar
     [collapsed]="sidebarCollapsed()"
-    [conversations]="conversations()"
-    [activeConversationId]="activeConversationId()"
+    [conversations]="conversationSummaries()"
+    [activeConversationId]="activeConversation()?.id ?? null"
     (collapseToggled)="onCollapseToggled()"
     (newChatClicked)="onNewChat()"
     (conversationSelected)="onConversationSelected($event)"

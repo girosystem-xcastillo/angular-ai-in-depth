@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { Conversation } from '../chat.model';
+import { ConversationSummary } from '../chat-history.model';
 
 @Component({
   selector: 'chat-history',
@@ -7,7 +7,7 @@ import { Conversation } from '../chat.model';
   styleUrl: './chat-history.scss',
 })
 export class ChatHistory {
-  conversations = input.required<Conversation[]>();
+  conversations = input.required<ConversationSummary[]>();
   activeConversationId = input<string | null>(null);
   conversationSelected = output<string>();
 

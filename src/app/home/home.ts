@@ -1,9 +1,10 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ChatSidebar } from './sidebar/sidebar';
 import { WelcomeScreen } from './welcome-screen/welcome-screen';
 import { ChatConversation } from './conversation/conversation';
 import { ChatMessage, Conversation } from './chat.model';
-import { MOCK_CONVERSATIONS } from './mock-conversations';
+import { ConversationSummary } from './chat-history.model';
+import { ChatHistoryService } from './chat-history.service';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -12,29 +13,38 @@ import { AuthService } from '../auth/auth.service';
   styleUrl: './home.scss',
   imports: [ChatSidebar, WelcomeScreen, ChatConversation],
 })
-export class Home {
+export class Home implements OnInit {
   private readonly authService = inject(AuthService);
+  private readonly chatHistoryService = inject(ChatHistoryService);
 
   sidebarCollapsed = signal(true);
-  activeConversationId = signal<string | null>(null);
-  conversations = signal<Conversation[]>([...MOCK_CONVERSATIONS]);
+  conversationSummaries = signal<ConversationSummary[]>([]);
+  activeConversation = signal<Conversation | null>(null);
 
-  activeConversation = computed(() => {
-    const convId = this.activeConversationId();
-    if (!convId) return null;
-    return this.conversations().find(conv => conv.id === convId) ?? null;
-  });
+  async ngOnInit() {
+    try {
+      const summaries = await this.chatHistoryService.getAllConversations();
+      this.conversationSummaries.set(summaries);
+    } catch {
+      // Leave sidebar empty on error
+    }
+  }
 
   onCollapseToggled() {
     this.sidebarCollapsed.update(collapsed => !collapsed);
   }
 
   onNewChat() {
-    this.activeConversationId.set(null);
+    this.activeConversation.set(null);
   }
 
-  onConversationSelected(convId: string) {
-    this.activeConversationId.set(convId);
+  async onConversationSelected(convId: string) {
+    try {
+      const conversation = await this.chatHistoryService.getConversationById(convId);
+      this.activeConversation.set(conversation);
+    } catch {
+      // Keep current view on error
+    }
   }
 
   async onLogout() {
@@ -49,15 +59,12 @@ export class Home {
       timestamp: new Date(),
     };
 
-    const currentConvId = this.activeConversationId();
-    if (currentConvId) {
-      this.conversations.update(convs =>
-        convs.map(conv =>
-          conv.id === currentConvId
-            ? { ...conv, messages: [...conv.messages, newMessage] }
-            : conv
-        )
-      );
+    const current = this.activeConversation();
+    if (current) {
+      this.activeConversation.set({
+        ...current,
+        messages: [...current.messages, newMessage],
+      });
     } else {
       const newConversation: Conversation = {
         id: crypto.randomUUID(),
@@ -65,8 +72,13 @@ export class Home {
         createdAt: new Date(),
         messages: [newMessage],
       };
-      this.conversations.update(convs => [newConversation, ...convs]);
-      this.activeConversationId.set(newConversation.id);
+      const summary: ConversationSummary = {
+        id: newConversation.id,
+        title: newConversation.title,
+        createdAt: newConversation.createdAt,
+      };
+      this.conversationSummaries.update(summaries => [summary, ...summaries]);
+      this.activeConversation.set(newConversation);
       this.sidebarCollapsed.set(false);
     }
   }

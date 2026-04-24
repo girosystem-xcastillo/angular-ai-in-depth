@@ -156,6 +156,10 @@ The goal is that the system prompt cannot be manipulated by the frontend user. T
 
 Then create an Open AI API conversation with the system prompt followed by the user initial message, taken from the request body. Save the conversation in an in-memory store in conversations-db.ts and create a conversation Id.
 
+notice that there is no need to save the system prompt in the database. This way it will never reach the frontend accidentally.
+
+Also, we can change the system prompt if needed.
+
 send the conversation to open AI using the Open AI API, and grab a response from Open AI. send only the AI response back to the user in the response body, together with the conversation Id.
 
 When calling the OpenAI API, just do a plain HTTP request using a promise-based HTTP client and async await. Don't use any open AI third party node package wrapper.
@@ -163,6 +167,7 @@ When calling the OpenAI API, just do a plain HTTP request using a promise-based 
 Don't worry about authentication for now.
 
 Don't mention OpenAI in the response names, etc. we might change it to another AI provider in the future.
+
 
 Add appropriate logging.
 
@@ -198,3 +203,14 @@ it should return a single conversation, with all it's messages.
 # add loging
 
 Add appropriate logging to all endpoints and middleware.
+
+# use chat history endpoints in frontend
+
+create a frontend service ChatHistoryService with two async methods: getAllConversations() that calls /api/get-conversations and getConversationById() that calls /api/get-conversation
+
+the history chat list on the side menu should be retrieved via getAllConversations().
+
+when clicking on a conversation on the list, the conversation should be returned by id from the getConversationById() method.
+
+
+

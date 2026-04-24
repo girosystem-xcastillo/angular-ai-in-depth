@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { ChatHistory } from '../chat-history/chat-history';
-import { Conversation } from '../chat.model';
+import { ConversationSummary } from '../chat-history.model';
 
 @Component({
   selector: 'chat-sidebar',
@@ -11,7 +11,7 @@ import { Conversation } from '../chat.model';
 })
 export class ChatSidebar {
   collapsed = input.required<boolean>();
-  conversations = input.required<Conversation[]>();
+  conversations = input.required<ConversationSummary[]>();
   activeConversationId = input<string | null>(null);
 
   collapseToggled = output<void>();
