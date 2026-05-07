@@ -5,7 +5,7 @@ This repository contains the code of the [Angular AI In Depth (with Cursor and C
 
 This course repository is updated to Angular v21.
 
-![Angular AI In Depth (with Cursor and Claude Code)](TODO)
+![Angular AI In Depth (with Cursor and Claude Code)](https://d3vigmphadbn9b.cloudfront.net/course-images/large-images/angular-ai-in-depth.jpg)
 
 # Installation pre-requisites
 
