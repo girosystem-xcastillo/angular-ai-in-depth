@@ -69,6 +69,12 @@ Here is a list of all the courses of the Angular University.
 
 <img src="https://angular-academy.s3.amazonaws.com/thumbnails/angular2-for-beginners-small-v2.png" width="400" alt="Angular For Beginners">
 
+## Angular AI In Depth (with Cursor and Claude Code)
+
+[Angular AI In Depth](https://angular-university.io/course/angular-ai-in-depth-course) — Build modern full-stack Angular applications with signals, standalone components, zoneless architecture, and OpenAI integration using Claude Code.
+
+<img src="https://d3vigmphadbn9b.cloudfront.net/course-images/large-images/angular-ai-in-depth.jpg" width="400" alt="Angular AI In Depth">
+
 ## Angular Testing In Depth (Signals Edition)
 
 [Angular Testing In Depth](https://angular-university.io/course/angular-testing-in-depth) — Write robust, maintainable tests for modern signal-based Angular applications.
