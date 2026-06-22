@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 
 export function indexRoute(req: Request, res: Response) {
+  req.log.info('Serving server status page');
+
   res.send(`<!DOCTYPE html>
 <html lang="en">
 <head>

@@ -10,7 +10,10 @@ export async function startConversation(req: Request, res: Response) {
   const promptId = req.body?.promptId;
   const message = req.body?.message;
 
+  req.log.info({ promptId }, 'Starting new conversation');
+
   if (typeof promptId !== 'string' || typeof message !== 'string' || !message.trim()) {
+    req.log.warn({ promptId, hasMessage: Boolean(message) }, 'Invalid request body for start-conversation');
     res.status(400).json({ message: 'promptId and a non-empty message are required' });
     return;
   }
@@ -18,6 +21,7 @@ export async function startConversation(req: Request, res: Response) {
   const prompt = getPromptById(promptId);
 
   if (!prompt) {
+    req.log.warn({ promptId }, 'Prompt not found');
     res.status(404).json({ message: 'Prompt not found' });
     return;
   }
@@ -63,7 +67,7 @@ export async function startConversation(req: Request, res: Response) {
 
   conversations.unshift(conversation);
 
-  req.log.info(`Started conversation ${conversation.id} using prompt ${promptId}`);
+  req.log.info({ conversationId: conversation.id, promptId }, 'Conversation started and saved');
 
   res.json({ conversationId: conversation.id, reply });
 }

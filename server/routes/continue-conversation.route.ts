@@ -10,7 +10,13 @@ export async function continueConversation(req: Request, res: Response) {
   const conversationId = req.body?.conversationId;
   const message = req.body?.message;
 
+  req.log.info({ conversationId }, 'Continuing conversation');
+
   if (typeof conversationId !== 'string' || typeof message !== 'string' || !message.trim()) {
+    req.log.warn(
+      { conversationId, hasMessage: Boolean(message) },
+      'Invalid request body for continue-conversation',
+    );
     res.status(400).json({ message: 'conversationId and a non-empty message are required' });
     return;
   }
@@ -18,6 +24,7 @@ export async function continueConversation(req: Request, res: Response) {
   const conversation = conversations.find(candidate => candidate.id === conversationId);
 
   if (!conversation) {
+    req.log.warn({ conversationId }, 'Conversation not found');
     res.status(404).json({ message: 'Conversation not found' });
     return;
   }
@@ -25,7 +32,10 @@ export async function continueConversation(req: Request, res: Response) {
   const prompt = getPromptById(conversation.promptId);
 
   if (!prompt) {
-    req.log.error(`Prompt ${conversation.promptId} not found for conversation ${conversationId}`);
+    req.log.error(
+      { conversationId, promptId: conversation.promptId },
+      'Conversation references a prompt that no longer exists',
+    );
     res.status(500).json({ message: 'Conversation is linked to an unknown prompt' });
     return;
   }
@@ -45,12 +55,17 @@ export async function continueConversation(req: Request, res: Response) {
     { role: userMessage.role, content: userMessage.content },
   ];
 
+  req.log.info(
+    { conversationId, promptId: conversation.promptId, messageCount: aiMessages.length },
+    'Sending conversation to AI provider',
+  );
+
   let reply: string;
 
   try {
     reply = await getChatCompletion(aiMessages);
   } catch (error) {
-    req.log.error({ err: error }, 'AI request failed while continuing a conversation');
+    req.log.error({ err: error, conversationId }, 'AI request failed while continuing a conversation');
     res.status(502).json({ message: 'Failed to get a response from the AI provider' });
     return;
   }
@@ -66,7 +81,10 @@ export async function continueConversation(req: Request, res: Response) {
   // a dangling user message in the stored conversation.
   conversation.messages.push(userMessage, assistantMessage);
 
-  req.log.info(`Continued conversation ${conversationId} (${conversation.messages.length} messages)`);
+  req.log.info(
+    { conversationId, totalMessages: conversation.messages.length },
+    'Conversation continued and saved',
+  );
 
   res.json({ conversationId, reply });
 }
