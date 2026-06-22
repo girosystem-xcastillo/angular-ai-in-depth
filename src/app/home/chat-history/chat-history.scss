@@ -1,0 +1,43 @@
+.section-title {
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 16px 16px 6px;
+  margin: 0;
+}
+
+.conversation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.conversation-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  padding: 7px 16px;
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s, color 0.15s;
+  font-family: var(--font-family);
+  border-radius: var(--radius-sm);
+
+  &:hover {
+    background: var(--color-icon-btn-hover);
+    color: var(--color-text-primary);
+  }
+
+  &.active {
+    color: var(--color-text-primary);
+    background: var(--color-accent-muted);
+  }
+}

@@ -1,0 +1,214 @@
+@use '../../../styles/responsive' as r;
+
+:host {
+  display: block;
+  flex-shrink: 0;
+}
+
+.side-nav {
+  height: 100%;
+  background: var(--color-bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  transition: width var(--transition-sidebar);
+  overflow: hidden;
+
+  &.collapsed {
+    width: var(--sidebar-collapsed-width);
+  }
+
+  @include r.mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 200;
+    transition: transform var(--transition-sidebar);
+    width: var(--sidebar-width);
+
+    &.collapsed {
+      width: var(--sidebar-width);
+      transform: translateX(-100%);
+    }
+  }
+}
+
+/* ── Collapsed header (icon strip) ───────────────────────── */
+
+.nav-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0 8px;
+  gap: 2px;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    background: var(--color-icon-btn-hover);
+    color: var(--color-text-primary);
+  }
+}
+
+.logo-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 2px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &:hover {
+    background: var(--color-accent-muted);
+    color: var(--color-accent);
+  }
+}
+
+/* ── Expanded header ─────────────────────────────────────── */
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 16px;
+  width: 100%;
+}
+
+.logo-img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ── Nav actions (New Chat, Search) ──────────────────────── */
+
+.nav-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 8px 8px;
+  gap: 2px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.nav-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-align: left;
+
+  svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: var(--color-icon-btn-hover);
+    color: var(--color-text-primary);
+  }
+}
+
+/* ── Conversation history ────────────────────────────────── */
+
+.nav-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 0;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-divider);
+    border-radius: var(--radius-full);
+  }
+}
+
+/* ── Footer / Logout ─────────────────────────────────────── */
+
+.nav-footer {
+  margin-top: auto;
+  padding: 10px 8px;
+  border-top: 1px solid var(--color-divider);
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: background 0.15s;
+
+  /* collapsed: icon-only square button */
+  width: 36px;
+  height: 36px;
+  padding: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: var(--color-accent-muted);
+  }
+
+  .side-nav:not(.collapsed) & {
+    width: 100%;
+    height: auto;
+    padding: 9px 12px;
+    justify-content: flex-start;
+    font-size: 14px;
+  }
+}

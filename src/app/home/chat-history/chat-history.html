@@ -1,0 +1,17 @@
+<section class="chat-history" aria-label="Recent conversations">
+  <h2 class="section-title">Recent</h2>
+  <ul class="conversation-list" role="list">
+    @for (conversation of conversations(); track conversation.id) {
+      <li>
+        <button
+          class="conversation-item"
+          [class.active]="conversation.id === activeConversationId()"
+          (click)="selectConversation(conversation.id)"
+          [attr.aria-current]="conversation.id === activeConversationId() ? 'page' : null"
+          [title]="conversation.title">
+          {{ conversation.title }}
+        </button>
+      </li>
+    }
+  </ul>
+</section>
