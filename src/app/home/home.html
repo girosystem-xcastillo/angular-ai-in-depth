@@ -1,0 +1,40 @@
+<div class="home-layout">
+  @if (!sidebarCollapsed()) {
+    <div class="sidebar-backdrop" (click)="toggleSidebar()" aria-hidden="true"></div>
+  }
+
+  <side-nav
+    [collapsed]="sidebarCollapsed()"
+    [conversations]="conversations()"
+    [activeConversationId]="activeConversationId()"
+    (collapseToggle)="toggleSidebar()"
+    (conversationSelect)="selectConversation($event)"
+    (newChat)="startNewChat()"
+    (logout)="handleLogout()">
+  </side-nav>
+
+  <main class="main-content">
+    <header class="mobile-header">
+      <button
+        class="mobile-menu-btn"
+        (click)="toggleSidebar()"
+        aria-label="Open navigation menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </header>
+
+    @if (activeConversation()) {
+      <conversation-thread
+        [conversation]="activeConversation()!"
+        [isLoading]="isLoading()"
+        (messageSend)="handleConversationMessage($event)">
+      </conversation-thread>
+    } @else {
+      <initial-state (messageSend)="handleNewMessage($event)"></initial-state>
+    }
+  </main>
+</div>

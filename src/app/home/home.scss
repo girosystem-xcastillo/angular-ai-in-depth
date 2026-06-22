@@ -1,0 +1,46 @@
+@use '../../styles/responsive' as r;
+@use '../../styles/layout' as l;
+
+:host {
+  @include l.page-shell;
+}
+
+.home-layout {
+  @include l.sidebar-layout;
+}
+
+.main-content {
+  @include l.main-content;
+}
+
+// ── Mobile sidebar overlay backdrop ──────────────────────
+
+.sidebar-backdrop {
+  display: none;
+
+  @include r.mobile {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+  }
+}
+
+// ── Mobile-only top header with menu button ───────────────
+
+.mobile-header {
+  display: none;
+
+  @include r.mobile {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--color-divider);
+  }
+}
+
+.mobile-menu-btn {
+  @include l.icon-btn;
+}

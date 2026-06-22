@@ -1,0 +1,79 @@
+@use '../../../styles/responsive' as r;
+@use '../../../styles/layout' as l;
+
+:host {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.initial-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+  max-width: 720px;
+  padding: 32px 24px;
+
+  @include r.mobile {
+    gap: 32px;
+    padding: 24px 16px;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-logo {
+  width: 280px;
+  height: auto;
+  object-fit: contain;
+
+  @include r.mobile {
+    width: 180px;
+  }
+}
+
+.hero-title {
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-align: center;
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  @include r.mobile {
+    font-size: 20px;
+  }
+}
+
+.input-wrapper {
+  width: 100%;
+}
+
+.input-bar {
+  @include l.input-bar;
+}
+
+.input-icon {
+  @include l.input-icon;
+}
+
+.input-field {
+  @include l.input-field;
+}
+
+.submit-btn {
+  @include l.submit-btn;
+}
